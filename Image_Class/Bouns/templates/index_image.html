@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Classification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .prediction-card {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .error-text {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Image Classification</h1>
+        <form action="/predict" method="post">
+            <div class="mb-3">
+                <label for="imageURL" class="form-label">Enter Image URL:</label>
+                <input type="text" class="form-control" id="imageURL" name="url" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Predict</button>
+            </div>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction-card">
+            <h2 class="text-center">Prediction Result</h2>
+            <p class="text-center">Predicted Category: {{ prediction }}</p>
+            <div class="text-center">
+                <img src="{{ url }}" class="img-fluid" alt="Input Image">
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p class="error-text text-center mt-3">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies (Optional if needed for Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
